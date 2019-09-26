@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imooc.miaosha.domain.User;
-import com.imooc.miaosha.rabbitmq.MQSender;
 import com.imooc.miaosha.redis.RedisService;
 import com.imooc.miaosha.redis.UserKey;
 import com.imooc.miaosha.result.CodeMsg;
@@ -24,8 +23,8 @@ public class SampleController {
 	@Autowired
 	RedisService redisService;
 
-	@Autowired
-	MQSender sender;
+//	@Autowired
+//	MQSender sender;
 	
 //	@RequestMapping("/mq/header")
 //    @ResponseBody

@@ -1,29 +1,9 @@
+/*
 package com.imooc.miaosha.controller;
-
-import java.awt.image.BufferedImage;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.imooc.miaosha.access.AccessLimit;
 import com.imooc.miaosha.domain.MiaoshaOrder;
 import com.imooc.miaosha.domain.MiaoshaUser;
-import com.imooc.miaosha.rabbitmq.MQSender;
-import com.imooc.miaosha.rabbitmq.MiaoshaMessage;
 import com.imooc.miaosha.redis.GoodsKey;
 import com.imooc.miaosha.redis.MiaoshaKey;
 import com.imooc.miaosha.redis.OrderKey;
@@ -35,6 +15,19 @@ import com.imooc.miaosha.service.MiaoshaService;
 import com.imooc.miaosha.service.MiaoshaUserService;
 import com.imooc.miaosha.service.OrderService;
 import com.imooc.miaosha.vo.GoodsVo;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @RequestMapping("/miaosha")
@@ -55,14 +48,19 @@ public class MiaoshaController implements InitializingBean {
 	@Autowired
 	MiaoshaService miaoshaService;
 	
-	@Autowired
-	MQSender sender;
+	*/
+/*@Autowired
+	MQSender sender;*//*
+
 	
 	private HashMap<Long, Boolean> localOverMap =  new HashMap<Long, Boolean>();
 	
-	/**
+	*/
+/**
 	 * 系统初始化
-	 * */
+	 * *//*
+*/
+/*
 	public void afterPropertiesSet() throws Exception {
 		List<GoodsVo> goodsList = goodsService.listGoodsVo();
 		if(goodsList == null) {
@@ -72,7 +70,8 @@ public class MiaoshaController implements InitializingBean {
 			redisService.set(GoodsKey.getMiaoshaGoodsStock, ""+goods.getId(), goods.getStockCount());
 			localOverMap.put(goods.getId(), false);
 		}
-	}
+	}*//*
+
 	
 	@RequestMapping(value="/reset", method=RequestMethod.GET)
     @ResponseBody
@@ -89,11 +88,13 @@ public class MiaoshaController implements InitializingBean {
 		return Result.success(true);
 	}
 	
-	/**
+	*/
+/**
 	 * QPS:1306
 	 * 5000 * 10
 	 * QPS: 2114
-	 * */
+	 * *//*
+
     @RequestMapping(value="/{path}/do_miaosha", method=RequestMethod.POST)
     @ResponseBody
     public Result<Integer> miaosha(Model model,MiaoshaUser user,
@@ -130,7 +131,8 @@ public class MiaoshaController implements InitializingBean {
     	mm.setGoodsId(goodsId);
     	sender.sendMiaoshaMessage(mm);
     	return Result.success(0);//排队中
-    	/*
+    	*/
+/*
     	//判断库存
     	GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);//10个商品，req1 req2
     	int stock = goods.getStockCount();
@@ -145,14 +147,17 @@ public class MiaoshaController implements InitializingBean {
     	//减库存 下订单 写入秒杀订单
     	OrderInfo orderInfo = miaoshaService.miaosha(user, goods);
         return Result.success(orderInfo);
-        */
+        *//*
+
     }
     
-    /**
+    */
+/**
      * orderId：成功
      * -1：秒杀失败
      * 0： 排队中
-     * */
+     * *//*
+
     @RequestMapping(value="/result", method=RequestMethod.GET)
     @ResponseBody
     public Result<Long> miaoshaResult(Model model,MiaoshaUser user,
@@ -204,3 +209,4 @@ public class MiaoshaController implements InitializingBean {
     	}
     }
 }
+*/
