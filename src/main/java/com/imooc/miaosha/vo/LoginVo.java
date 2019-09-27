@@ -13,9 +13,12 @@ import com.imooc.miaosha.validator.IsMobile;
 @Setter
 @ToString
 public class LoginVo {
-
+    /**
+     * jsr303校验
+     */
+    // 自定义注解
     @NotNull
-    @IsMobile
+    @IsMobile(message = "121212121212", required = false)
     private String mobile;
 
     @NotNull

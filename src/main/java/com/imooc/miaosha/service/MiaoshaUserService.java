@@ -85,6 +85,7 @@ public class MiaoshaUserService {
         // 1 判断手机号是否存在
         MiaoshaUser user = getById(Long.parseLong(mobile));
         if (user == null) {
+            // 异常往外抛出，将被异常处理器处理，切面！！！
             throw new GlobalException(CodeMsg.MOBILE_NOT_EXIST);
         }
         // 2 验证密码

@@ -19,12 +19,16 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value=Exception.class)
 	public Result<String> exceptionHandler(HttpServletRequest request, Exception e){
 		e.printStackTrace();
+		// 1 全局异常
 		if(e instanceof GlobalException) {
+			// 对象赋值引用！！！
 			GlobalException ex = (GlobalException)e;
 			return Result.error(ex.getCm());
+			// 2 绑定异常
 		}else if(e instanceof BindException) {
 			BindException ex = (BindException)e;
 			List<ObjectError> errors = ex.getAllErrors();
+			// 可能多个错误，只取出第一个！！！
 			ObjectError error = errors.get(0);
 			String msg = error.getDefaultMessage();
 			return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));

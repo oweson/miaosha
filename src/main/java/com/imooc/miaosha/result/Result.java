@@ -43,5 +43,8 @@ public class Result<T> {
         }
     }
 
+    public static void main(String[] args) {
+    }
+
 
 }

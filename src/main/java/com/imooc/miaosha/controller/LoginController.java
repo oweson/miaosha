@@ -41,6 +41,7 @@ public class LoginController {
         log.info(loginVo.toString());
         //登录
         String token = userService.login(response, loginVo);
+        // 异常直接就被处理器处理了，切面
         return Result.success(token);
     }
 }
