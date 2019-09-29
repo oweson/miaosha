@@ -68,8 +68,9 @@ public class MiaoshaUserService {
             return null;
         }
         MiaoshaUser user = redisService.get(MiaoshaUserKey.token, token, MiaoshaUser.class);
-        //延长有效期
+        //1 延长有效期--容器的session时间：最后一次访问加上有效时间
         if (user != null) {
+            // 2 重新写入cookie;
             addCookie(response, token, user);
         }
         return user;
@@ -101,13 +102,17 @@ public class MiaoshaUserService {
         addCookie(response, token, user);
         return token;
     }
-
+   // token不必每次都生成，复用！！！
     private void addCookie(HttpServletResponse response, String token, MiaoshaUser user) {
-        // 写入缓存！
+        // 写入缓存！前缀和token还有用户信息，根据token查找用户信息
         redisService.set(MiaoshaUserKey.token, token, user);
+        // 生成cookie,k，v
         Cookie cookie = new Cookie(COOKI_NAME_TOKEN, token);
+        // 和session保持一致，
         cookie.setMaxAge(MiaoshaUserKey.token.expireSeconds());
+        // web的根目录
         cookie.setPath("/");
+        // 值需要写入response就ok啦；
         response.addCookie(cookie);
     }
 

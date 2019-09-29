@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * 商品表和秒杀表公用的Vo
+ */
 @Setter
 @Getter
 @ToString

@@ -75,7 +75,7 @@ public class AccessInterceptor  extends HandlerInterceptorAdapter{
 		out.flush();
 		out.close();
 	}
-
+   // 延长session时间
 	private MiaoshaUser getUser(HttpServletRequest request, HttpServletResponse response) {
 		String paramToken = request.getParameter(MiaoshaUserService.COOKI_NAME_TOKEN);
 		String cookieToken = getCookieValue(request, MiaoshaUserService.COOKI_NAME_TOKEN);
